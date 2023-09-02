@@ -1,20 +1,27 @@
 <div class="main">
 
-  <div class="title">
-    <h1>Titanic Passenger Info</h1>
-  </div>
 
   <div class="form-sec">
     <form [formGroup]="detailForm">
+
+      <div class="title">
+        <h1>Titanic Passenger Info</h1>
+      </div>
+
+
       <div class="form-row">
         <mat-form-field appearance="outline">
-          <mat-label>PassengerId</mat-label>
+          <mat-label>Passenger Id</mat-label>
           <input formControlName="passengerId" matInput>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>Passenger Class</mat-label>
-          <input formControlName="pclass" matInput>
+          <mat-select formControlName="passengerClass">
+            <mat-option value="1">1st class</mat-option>
+            <mat-option value="2">2nd class</mat-option>
+            <mat-option value="3">3rd class</mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
 
@@ -25,7 +32,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>SibSp</mat-label>
+          <mat-label>Passenger Family Size</mat-label>
           <input formControlName="sibSp" matInput>
         </mat-form-field>
       </div>
@@ -38,31 +45,34 @@
 
         <mat-form-field appearance="outline">
           <mat-label>Ticket Fare</mat-label>
-          <input formControlName="Fare" matInput>
+          <input formControlName="fare" matInput>
         </mat-form-field>
       </div>
 
       <div class="form-row">
 
-        <mat-form-field appearance="outline">
-          <mat-label formControlName="pEmbarked">Passenger Embarked</mat-label>
-          <mat-select>
-            <mat-option value="option1">Option 1</mat-option>
-            <mat-option value="option3">Option 3</mat-option>
+        <mat-form-field appearance="outline" class="custom-field">
+          <mat-label>Toppings</mat-label>
+          <mat-select formControlName="pEmbarked">
+            <mat-option value="cherub">Cherub</mat-option>
+            <mat-option value="southampton">Southampton</mat-option>
+            <mat-option value="queenstown">Queenstown</mat-option>
           </mat-select>
         </mat-form-field>
 
         <section>
-          <label >Sex :</label>
-          <mat-radio-group [(ngModel)]="labelPosition">
-            <mat-radio-button value="male">Male</mat-radio-button>
-            <mat-radio-button value="female">Female</mat-radio-button>
+          <label style="margin-right: 10px">Sex :</label>
+          <mat-radio-group formControlName="sex">
+            <mat-radio-button style="margin-right: 10px" *ngFor="let sex of sex"
+                              [value]="sex">
+              {{sex}}
+            </mat-radio-button>
           </mat-radio-group>
         </section>
       </div>
 
       <div class="btn-row">
-        <button mat-raised-button color="primary">Result</button>
+        <button mat-raised-button (click)="submit()" color="primary">Result</button>
       </div>
     </form>
   </div>
